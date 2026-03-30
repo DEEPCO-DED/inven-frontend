@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { loginAPI } from "../Services/api";
-import styles from "./login.module.css";
+import styles from "./Login.module.css";
 
 
 const BG_CONFIG = {
