@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+/* App.css or index.css */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+.container {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f6f7;
+  min-height: 100vh;
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  box-sizing: border-box;
+
+}
+
+.inner {
+  width: 100%;
+  max-width: 420px;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #7a8899;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 300;
+  color: #1e2530;
+  letter-spacing: -0.5px;
+  margin: 0 0 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eaecef;
+  border: 1px solid #d0d5dc;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: #7a8899;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8e9aab;
+  display: inline-block;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d0d5dc;
+  border-radius: 16px;
+overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 90%;
+}
+
+.cardTop {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.cardSub {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9aa5b4;
+  margin: 0 0 4px;
+}
+
+.cardHeading {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2d3a47;
+  margin: 0 0 1.25rem;
+}
+
+.cardBody {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.lbl {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a8899;
+}
+
+.optional {
+  font-size: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #b0bec5;
+  font-weight: 400;
+}
+
+.inp {
+  background: #f5f6f7;
+  border: 1px solid #d0d5dc;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: #2d3a47;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.inp:focus {
+  border-color: #8e9aab;
+  box-shadow: 0 0 0 2px rgba(142, 154, 171, 0.15);
+}
+
+.inp::placeholder {
+  color: #b0bec5;
+}
+
+.divider {
+  height: 1px;
+  background: #e8eaed;
+}
+
+.footer {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 8px;
+  background: #f9fafb;
+}
+
+.btnCancel {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dc;
+  background: transparent;
+  color: #9aa5b4;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnCancel:hover {
+  border-color: #8e9aab;
+  color: #2d3a47;
+}
+
+.btnSave {
+  flex: 2;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #8e9aab;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+}
+
+.btnSave:hover { background: #6b7a8d; }
+.btnSave:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.success {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #6b7a8d;
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+  text-align: center;
+}

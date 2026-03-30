@@ -1,0 +1,352 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-main:      #fdfdfd;
+  --bg-sidebar:   #1b3022;      /* Forest Green */
+  --bg-grid:      #f4f1ee;      /* Brownish Light Grey */
+  --primary:      #2d6a4f;
+  --accent-brown: #5d4037;      /* Espresso Brown */
+  --latte:        #e6ccb2;
+  --white:        #ffffff;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui:      'Outfit', sans-serif;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin-top: 0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page Structure (Kills all gaps) ── */
+.page {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 65px;       /* ← removed the empty 54px header row */
+  background: var(--bg-main);
+overflow-y: auto;
+}
+.header {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: var(--white);
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 26px;
+  z-index: 100;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 160px 1fr 300px;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Sidebar (Green) ── */
+.sidebar {
+  background:   #2d6a4f;;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: 0.2s;
+}
+
+.active {
+  background: #F4E9CD! important;
+  color: var(--primary) !important;
+  font-weight: 700;
+}
+
+/* ── Menu Grid (Fixed Row Breaking) ── */
+.grid {
+  padding: 20px;
+  display: grid;
+  /* 'auto-fill' creates more columns on big screens instead of stretching 3 columns */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  /* 'auto-rows' ensures the height stays consistent */
+  grid-auto-rows: 250px; 
+  gap: 20px;
+  overflow-y: auto;
+  align-content: start;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Stack image and label */
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  
+}
+.CARD:HOVER{
+transform: translateY(-5px); /* Lift effect */
+}
+.card:hover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* This creates the yellow glow "beam" */
+  background: conic-gradient(
+    transparent, 
+    #d4af37, /* Your Golden Leaf Yellow */
+    transparent 20%
+  );
+  animation: rotateGlow 3s linear infinite;
+  z-index: -2;
+}
+
+/* The Mask (This covers the middle so only the edge glows) */
+.card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 3px; /* This defines your border thickness (3px) */
+  background: white;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Hover Lift Effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Plus Icon Hover */
+.topRightPlus {
+  transition: all 0.3s ease;
+}
+
+.card:hover .topRightPlus {
+  transform: scale(1.2);
+  background: #1b3022; /* Darkens the green on hover */
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+/* 3. IMAGE ZOOM ON HOVER */
+.foodImg {
+  transition: transform 0.5s ease;
+}
+
+.card:hover .foodImg {
+  transform: scale(1.08); /* Subtle zoom */
+}
+.card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+
+}
+
+.cardLabel {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 8px;
+  background: linear-gradient(transparent, rgba(88, 124, 48, 0.95));
+  color: var(--white);
+  font-family: var(--font-ui);
+}
+
+.cardLabel h4 { font-size: 13px; }
+.cardLabel p { color: var(--latte); font-weight: 700; }
+
+/* ── Cart (Brown Items) ── */
+.cart {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Fill the sidebar height */
+  padding: 15px;
+  overflow: hidden; /* Prevent the whole cart from scrolling */
+}
+.totalRow {
+  margin-top: auto; /* Pushes to the very bottom */
+  padding-top: 15px;
+  border-top: 2px solid #d4af37; /* Golden Leaf accent */
+  background: white;
+  flex-shrink: 0; /* Prevents the button from squishing */
+}
+
+.cart h3 {
+  font-family: var(--font-display);
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.cartList { flex: 1; 
+  overflow-y: auto; }
+
+/* ONLY cart items display in BROWN */
+.cartItemName, 
+.cartItemPrice, 
+.qtyNum, 
+.totalAmount {
+  color: var(--accent-brown) !important;
+  font-family: var(--font-ui);
+}
+
+.cartItem {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── Footer ── */
+.footer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background:#2d6a4f;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.footer strong { color: var(--latte); font-family: var(--font-display); font-size: 18px; }
+.footer span { font-size: 9px; text-transform: uppercase; opacity: 0.6; }
+
+/* ── Buttons ── */
+.placeBtn {
+  width: 100%;
+  padding: 15px;
+  background: #2d6a4f; /* Forest Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+.cartHeader {
+  display: flex;
+  justify-content: space-between; /* Pushes content to opposite ends */
+  align-items: center;            /* Vertically centers title and button */
+  padding: 16px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;                 /* Prevents the header from collapsing */
+}
+
+.cartHeader h3 {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: #2d6a4f;
+  letter-spacing: 1px;
+}
+
+.clearBtn {
+  background: #fff5f5;           /* Light red background */
+  color: #e03131;                /* Red text color */
+  border: 1px solid #ffc9c9;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.clearBtn:hover {
+  background: #e03131;
+  color: white;
+  border-color: #e03131;
+}
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Locks image to a perfect square */
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.foodImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fills container perfectly without distortion */
+  display: block;
+}
+
+.topRightPlus {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #2d6a4f;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid white;
+}
+
+.middleBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers perfectly */
+  background: #d4af37;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  border: 3px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.soldOutOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
